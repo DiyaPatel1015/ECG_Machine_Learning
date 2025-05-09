@@ -1,44 +1,73 @@
-This project explores the use of Convolutional Neural Networks (CNNs) for automated classification of ECG signals to detect arrhythmias, especially atrial fibrillation. Two deep learning approaches are implemented: 
-    1D CNN using raw ECG time-series signals
-    2D CNN using spectrograms generated from ECG
+# 🫀 ECG Arrhythmia Detection Using CNNs
 
-📌 Project Overview
-Manual interpretation of ECGs is prone to human error and time-consuming. This machine learning-based solution aims to:    
-    Improve diagnostic accuracy
-    Enable real-time heart monitoring
-    Reduce reliance on manual review
+This project explores the use of **Convolutional Neural Networks (CNNs)** for the **automated classification of ECG signals** to detect arrhythmias, particularly **atrial fibrillation (AFib)**.
 
-🧠 Tech Stack
-Python, Jupyter
-TensorFlow / Keras
-NumPy, Matplotlib, Seaborn
-Short-Time Fourier Transform (STFT)
-Dataset: PhysioNet
+Two deep learning approaches are implemented:
+- 🧩 **1D CNN** using raw ECG time-series signals  
+- 🖼 **2D CNN** using spectrograms generated from ECG via STFT
 
-🛠 Methodology
-Preprocessing
-    Denoise ECG signals
-    Normalize and segment into 5000-sample windows
-    Apply STFT to generate spectrograms
-Modeling
-    1D CNN for time-series classification
-    2D CNN for spectrogram image classification
-Evaluation
-    Accuracy, confusion matrix, classification report
+---
 
-📊 Results
-Model   	 Input Type	     Accuracy	    Notes
-1D CNN	   Raw ECG	       100%	        May be overfitted or leaked
-2D CNN	   Spectrograms	   100%	        Trained quickly, but same concern
+## 📌 Project Overview
 
-⚠️ Why 100% Accuracy? [Important]
-Although both models report perfect classification, this is likely due to data leakage and overfitting:
-    Random Sample-Level Splitting: Windows from the same ECG may exist in both training and test sets, leading to memorization.
-    No Patient-Level Segregation: The model has likely seen similar patterns during training.
-    Lack of Real-World Noise: Clean, balanced datasets are easy to learn from but do not reflect clinical conditions.
+Manual ECG interpretation is time-consuming and susceptible to human error. This project presents a machine learning solution to:
+- ✅ Improve diagnostic accuracy  
+- 🕐 Enable real-time heart monitoring  
+- 👨‍⚕️ Reduce reliance on manual ECG review  
 
-🔧 How to Fix
-    Split the data by patient ID, not signal window.
-    Use GroupKFold for cross-validation.
-    Add dropout or L2 regularization to reduce overfitting.
-    Test on external ECG datasets or real-world scenarios.
+---
+
+## 🧠 Tech Stack
+
+- **Language & Tools**: Python, Jupyter  
+- **Libraries**: TensorFlow / Keras, NumPy, Matplotlib, Seaborn  
+- **Signal Processing**: Short-Time Fourier Transform (STFT)  
+- **Dataset**: [PhysioNet MIT-BIH Atrial Fibrillation Database](https://physionet.org/physiobank/database/afdb/)
+
+---
+
+## 🛠 Methodology
+
+### 🔃 Preprocessing
+- Denoise ECG signals  
+- Normalize and segment into 5000-sample windows  
+- Generate spectrograms using STFT  
+
+### 🧠 Modeling
+- **1D CNN** for raw time-series classification  
+- **2D CNN** for spectrogram-based image classification  
+
+### 📈 Evaluation
+- Accuracy  
+- Confusion matrix  
+- Classification report  
+
+---
+
+## 📊 Results
+
+| Model   | Input Type     | Accuracy | Notes                                    |
+|---------|----------------|----------|------------------------------------------|
+| 1D CNN  | Raw ECG        | 100%     | Likely overfitted or data leakage        |
+| 2D CNN  | Spectrograms   | 100%     | Trained quickly, similar concerns        |
+
+---
+
+## ⚠️ Why 100% Accuracy? *(Important)*
+
+Perfect scores suggest issues with **data leakage** and **overfitting**:
+
+- ❌ **Random sample-level splitting**: ECG windows from the same patient may be in both training and test sets.
+- ❌ **No patient-level separation**: The model may memorize patient-specific patterns.
+- ❌ **Ideal dataset conditions**: Clean, well-balanced datasets lack real-world noise and variability.
+
+---
+
+## 🔧 Recommendations for Improvement
+
+- ✅ Use **patient-level splits** to avoid data leakage  
+- ✅ Apply **GroupKFold** cross-validation by patient ID  
+- ✅ Introduce **dropout** or **L2 regularization** to combat overfitting  
+- ✅ Test on **external datasets** or noisier, real-world ECG data  
+
+---
