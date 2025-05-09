@@ -22,8 +22,7 @@ Manual ECG interpretation is time-consuming and susceptible to human error. This
 - **Language & Tools**: Python, Jupyter  
 - **Libraries**: TensorFlow / Keras, NumPy, Matplotlib, Seaborn  
 - **Signal Processing**: Short-Time Fourier Transform (STFT)  
-- **Dataset**: [PhysioNet MIT-BIH Atrial Fibrillation Database](https://physionet.org/physiobank/database/afdb/)
-
+- **Dataset**: From PhysioNet 
 ---
 
 ## 🛠 Methodology
